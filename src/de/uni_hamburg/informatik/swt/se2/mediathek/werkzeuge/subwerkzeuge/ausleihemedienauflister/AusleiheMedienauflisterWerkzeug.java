@@ -80,12 +80,16 @@ public class AusleiheMedienauflisterWerkzeug extends ObservableSubWerkzeug
         for (Medium medium : medienListe)
         {
             boolean istVerliehen = _verleihService.istVerliehen(medium);
-            // TODO für Aufgabenblatt 6 (nicht löschen): Falls ein Vormerker für
+            // TODO,DONE,NK für Aufgabenblatt 6 (nicht löschen): Falls ein Vormerker für
             // ein Medium existiert, muss dieser hier ermittelt werden.
             // Ist dies korrekt implementiert, erscheint in der Ausleiheansicht
             // der Name des Vormerkers, an den ein Medium ausgeliehen werden
             // darf, gemäß Anforderung d).
             Kunde ersterVormerker = null;
+            if (_verleihService.istVorgemerkt(medium))
+            {
+                ersterVormerker = _verleihService.getVormerkerFuer(medium);
+            }
 
             medienFormatierer.add(new AusleiheMedienFormatierer(medium,
                     istVerliehen, ersterVormerker));
@@ -143,14 +147,12 @@ public class AusleiheMedienauflisterWerkzeug extends ObservableSubWerkzeug
         List<Medium> result = new ArrayList<Medium>();
         int[] selectedRows = _ui.getMedienAuflisterTable()
             .getSelectedRows();
-        AusleiheMedienTableModel ausleiheMedienTableModel = _ui
-            .getMedienAuflisterTableModel();
+        AusleiheMedienTableModel ausleiheMedienTableModel = _ui.getMedienAuflisterTableModel();
         for (int zeile : selectedRows)
         {
             if (ausleiheMedienTableModel.zeileExistiert(zeile))
             {
-                Medium medium = ausleiheMedienTableModel
-                    .getMediumFuerZeile(zeile);
+                Medium medium = ausleiheMedienTableModel.getMediumFuerZeile(zeile);
                 result.add(medium);
             }
         }

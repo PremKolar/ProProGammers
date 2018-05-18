@@ -79,7 +79,7 @@ public class VormerkMedienauflisterWerkzeug extends ObservableSubWerkzeug
         List<VormerkMedienFormatierer> medienFormatierer = new ArrayList<VormerkMedienFormatierer>();
         for (Medium medium : medienListe)
         {
-            // TODO für Aufgabenblatt 6 (nicht löschen): Die
+            // TODO,DONE,NK für Aufgabenblatt 6 (nicht löschen): Die
             // VormerkMedienFormatierer müssen noch mit einem möglichen
             // Entleiher und möglichen Vormerkern ausgestattet werden.
             // Ist dies korrekt implementiert, erscheinen in der Vormerkansicht

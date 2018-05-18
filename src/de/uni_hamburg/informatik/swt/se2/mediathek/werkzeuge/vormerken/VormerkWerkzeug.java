@@ -209,10 +209,12 @@ public class VormerkWerkzeug
     {
         List<Medium> medien = _medienAuflisterWerkzeug.getSelectedMedien();
         Kunde kunde = _kundenAuflisterWerkzeug.getSelectedKunde();
-        // TODO für Aufgabenblatt 6 (nicht löschen): Prüfung muss noch eingebaut
+
+        // TODO,DONE,NK für Aufgabenblatt 6 (nicht löschen): Prüfung muss noch eingebaut
         // werden. Ist dies korrekt imlpementiert, wird der Vormerk-Button gemäß
         // der Anforderungen a), b), c) und e) aktiviert.
-        boolean vormerkenMoeglich = (kunde != null) && !medien.isEmpty();
+        boolean vormerkenMoeglich = (kunde != null) && !medien.isEmpty()
+                && _verleihService.sindAlleVormerkenMoeglich(kunde, medien);
 
         return vormerkenMoeglich;
     }
@@ -225,19 +227,11 @@ public class VormerkWerkzeug
     private void merkeAusgewaehlteMedienVor()
     {
 
-        List<Medium> selectedMedien = _medienAuflisterWerkzeug
-            .getSelectedMedien();
+        List<Medium> selectedMedien = _medienAuflisterWerkzeug.getSelectedMedien();
         Kunde selectedKunde = _kundenAuflisterWerkzeug.getSelectedKunde();
-        // TODO für Aufgabenblatt 6 (nicht löschen): Vormerken einbauen
+        // TODO,DONE,NK für Aufgabenblatt 6 (nicht löschen): Vormerken einbauen
 
-        // check dass kunde medium nicht schon ausgeliehen hat
-        // if vormerkkarte existiert
-        // if kundenliste <3
-        // add kunden to vormerkkarte
-        // else 
-        // vormerken nicht möglich
-        //  else
-        // VormerkKarte _vormerkkarte = new VormerkKarte etc;
+        _verleihService.vormerkeAn(selectedKunde, selectedMedien);
 
     }
 
@@ -246,8 +240,7 @@ public class VormerkWerkzeug
      */
     private void zeigeAusgewaehlteMedien()
     {
-        List<Medium> selectedMedien = _medienAuflisterWerkzeug
-            .getSelectedMedien();
+        List<Medium> selectedMedien = _medienAuflisterWerkzeug.getSelectedMedien();
         _medienDetailAnzeigerWerkzeug.setMedien(selectedMedien);
     }
 

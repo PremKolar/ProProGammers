@@ -212,12 +212,23 @@ public class AusleihWerkzeug
     {
         List<Medium> medien = _medienAuflisterWerkzeug.getSelectedMedien();
         Kunde kunde = _kundenAuflisterWerkzeug.getSelectedKunde();
-        // TODO für Aufgabenblatt 6 (nicht löschen): So ändern, dass vorgemerkte
+        // TODO,DONE,NK für Aufgabenblatt 6 (nicht löschen): So ändern, dass vorgemerkte
         // Medien nur vom ersten Vormerker ausgeliehen werden können, gemäß
         // Anforderung d).
         boolean ausleiheMoeglich = (kunde != null) && !medien.isEmpty()
                 && _verleihService.sindAlleNichtVerliehen(medien);
 
+        for (Medium medium : medien)
+        {
+            if (_verleihService.istVorgemerkt(medium))
+            {
+                if (!_verleihService.getVormerkerFuer(medium, 0)
+                    .equals(kunde))
+                {
+                    ausleiheMoeglich = false;
+                }
+            }
+        }
         return ausleiheMoeglich;
     }
 
@@ -227,8 +238,7 @@ public class AusleihWerkzeug
      */
     private void leiheAusgewaehlteMedienAus()
     {
-        List<Medium> selectedMedien = _medienAuflisterWerkzeug
-            .getSelectedMedien();
+        List<Medium> selectedMedien = _medienAuflisterWerkzeug.getSelectedMedien();
         Kunde selectedKunde = _kundenAuflisterWerkzeug.getSelectedKunde();
         try
         {
@@ -247,8 +257,7 @@ public class AusleihWerkzeug
      */
     private void zeigeAusgewaehlteMedien()
     {
-        List<Medium> selectedMedien = _medienAuflisterWerkzeug
-            .getSelectedMedien();
+        List<Medium> selectedMedien = _medienAuflisterWerkzeug.getSelectedMedien();
         _medienDetailAnzeigerWerkzeug.setMedien(selectedMedien);
     }
 

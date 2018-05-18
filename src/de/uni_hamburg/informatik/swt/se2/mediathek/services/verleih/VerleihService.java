@@ -251,4 +251,6 @@ public interface VerleihService extends ObservableService
      * @ensure result == null || result == kunde
      */
     Kunde getVormerkerFuer(Medium medium, int i);
+
+    boolean sindAlleVormerkenMoeglich(Kunde kunde, List<Medium> medien);
 }

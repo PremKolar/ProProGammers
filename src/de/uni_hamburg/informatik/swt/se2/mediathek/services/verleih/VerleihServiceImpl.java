@@ -237,18 +237,22 @@ public class VerleihServiceImpl extends AbstractObservableService implements
     {
         assert kundeImBestand(kunde) : "Vorbedingung verletzt: kundeImBestand(kunde)";
         assert sindAlleVormerkenMoeglich(kunde, medien) : "Vorbedingung verletzt: sindAlleNichtVerliehen(medien) ";
+        Vormerkkarte karte;
 
         for (Medium medium : medien)
         {
+
             if (istVorgemerkt(medium))
             {
-                Vormerkkarte karte = getVormerkkarteFuer(medium);
+                karte = getVormerkkarteFuer(medium);
                 karte.fuegeKundeHinzu(kunde);
             }
             else
             {
-                Vormerkkarte karte = new Vormerkkarte(medium, kunde);
+                karte = new Vormerkkarte(medium, kunde);
             }
+
+            _vormerkkarten.put(medium, karte);
         }
 
     }

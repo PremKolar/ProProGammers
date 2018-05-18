@@ -6,7 +6,7 @@ import java.util.List;
 import de.uni_hamburg.informatik.swt.se2.mediathek.materialien.medien.Medium;
 
 /**
- * TODO
+ * TODO text anpassen
  * Mit Hilfe von Verleihkarten werden beim Verleih eines Mediums alle relevanten
  * Daten notiert.
  * 
@@ -27,7 +27,7 @@ public class Vormerkkarte
     private List<Kunde> _queue = new LinkedList<Kunde>(); // this was a Queue initially. List works much better..
     private final Medium _medium;
 
-    /** TODO
+    /** TODO anpassen
      * Initialisert eine neue Verleihkarte mit den gegebenen Daten.
      * 
      * @param entleiher Ein Kunde, der das Medium ausgeliehen hat.
