@@ -104,6 +104,13 @@ public class VerleihServiceImpl extends AbstractObservableService implements
 
     public boolean istVormerkenMoeglich(Medium medium, Kunde kunde)
     {
+
+        // TODO kommentieren welche der vorbedingunen hier wo gecheckt werden
+        if (istVerliehenAn(kunde, medium))
+        {
+            return false;
+        }
+
         if (istVorgemerkt(medium))
         {
             Vormerkkarte karte = getVormerkkarteFuer(medium);
