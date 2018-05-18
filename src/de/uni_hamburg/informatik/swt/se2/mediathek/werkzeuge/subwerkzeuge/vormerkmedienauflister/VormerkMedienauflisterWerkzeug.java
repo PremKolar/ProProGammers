@@ -85,9 +85,21 @@ public class VormerkMedienauflisterWerkzeug extends ObservableSubWerkzeug
             // Ist dies korrekt implementiert, erscheinen in der Vormerkansicht
             // die Namen des Entleihers und der möglichen 3 Vormerker.
             Kunde entleiher = null;
+            if (_verleihService.istVerliehen(medium))
+            {
+                entleiher = _verleihService.getEntleiherFuer(medium);
+            }
+
             Kunde vormerker1 = null;
             Kunde vormerker2 = null;
             Kunde vormerker3 = null;
+
+            if (_verleihService.istVorgemerkt(medium))
+            {
+                vormerker1 = _verleihService.getVormerkerFuer(medium, 1);
+                vormerker2 = _verleihService.getVormerkerFuer(medium, 2);
+                vormerker3 = _verleihService.getVormerkerFuer(medium, 3);
+            }
 
             medienFormatierer.add(new VormerkMedienFormatierer(medium,
                     entleiher, vormerker1, vormerker2, vormerker3));
@@ -145,8 +157,7 @@ public class VormerkMedienauflisterWerkzeug extends ObservableSubWerkzeug
         List<Medium> result = new ArrayList<Medium>();
         int[] selectedRows = _ui.getMedienAuflisterTable()
             .getSelectedRows();
-        VormerkMedienTableModel medienTableModel = _ui
-            .getMedienAuflisterTableModel();
+        VormerkMedienTableModel medienTableModel = _ui.getMedienAuflisterTableModel();
         for (int zeile : selectedRows)
         {
             if (medienTableModel.zeileExistiert(zeile))

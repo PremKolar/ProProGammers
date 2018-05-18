@@ -150,13 +150,11 @@ public class Verleihkarte
             Verleihkarte other = (Verleihkarte) obj;
 
             if (other.getAusleihdatum()
-                .equals(_ausleihdatum)
-                    && other.getEntleiher()
-                        .equals(_entleiher)
-                    && other.getMedium()
-                        .equals(_medium))
+                .equals(_ausleihdatum) && other.getEntleiher()
+                .equals(_entleiher) && other.getMedium()
+                .equals(_medium))
 
-                result = true;
+            result = true;
         }
         return result;
     }
