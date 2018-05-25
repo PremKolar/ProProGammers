@@ -72,6 +72,9 @@ public class VormerkMedienauflisterWerkzeug extends ObservableSubWerkzeug
 
     /**
      * Holt und setzt die Medieninformationen.
+     * 
+     * TODO
+     * musste ich zu public aendern, um die gui refreshen zu können nachdem auf VORMERKEN geklickt wurde. siehe VormerkWerkzeug.registriereVormerkAktion
      */
     public void setzeAnzuzeigendeMedien()
     {

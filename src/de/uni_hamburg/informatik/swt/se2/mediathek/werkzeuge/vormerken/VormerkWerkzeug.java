@@ -161,6 +161,8 @@ public class VormerkWerkzeug
                 public void actionPerformed(ActionEvent e)
                 {
                     merkeAusgewaehlteMedienVor();
+
+                    // TODO die zeile musste ich hier einfügen, da sich sonst die gui nicht aktualisiert hatte.. dafür musste ich auch setzeAnzuzeigendeMedien auf public ändern..
                     _medienAuflisterWerkzeug.setzeAnzuzeigendeMedien();
                 }
             });

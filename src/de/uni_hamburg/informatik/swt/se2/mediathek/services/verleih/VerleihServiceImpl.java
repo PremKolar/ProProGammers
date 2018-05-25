@@ -73,16 +73,6 @@ public class VerleihServiceImpl extends AbstractObservableService implements
     }
 
     /**
-     * Erzeugt eine neue leere HashMap.
-     */
-    private HashMap<Medium, Vormerkkarte> erzeugeVormerkkartenBestand()
-    {
-        HashMap<Medium, Vormerkkarte> result = new HashMap<Medium, Vormerkkarte>();
-        // empty map
-        return result;
-    }
-
-    /**
      * Erzeugt eine neue HashMap aus dem Initialbestand.
      */
     private HashMap<Medium, Verleihkarte> erzeugeVerleihkartenBestand(
@@ -100,42 +90,6 @@ public class VerleihServiceImpl extends AbstractObservableService implements
     public List<Verleihkarte> getVerleihkarten()
     {
         return new ArrayList<Verleihkarte>(_verleihkarten.values());
-    }
-
-    public boolean istVormerkenMoeglich(Medium medium, Kunde kunde)
-    {
-
-        // TODO kommentieren welche der vorbedingunen hier wo gecheckt werden
-        if (istVerliehenAn(kunde, medium))
-        {
-            return false;
-        }
-
-        if (istVorgemerkt(medium))
-        {
-            Vormerkkarte karte = getVormerkkarteFuer(medium);
-            if (karte.kundeSchonInQueue(kunde) || karte.gibQueueLaenge() == 3)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-        else
-        {
-            return true;
-        }
-    }
-
-    @Override
-    public boolean istVorgemerkt(Medium medium)
-    {
-
-        assert mediumImBestand(medium) : "Vorbedingung verletzt: mediumExistiert(medium)";
-        return _vormerkkarten.get(medium) != null;
-
     }
 
     @Override
@@ -229,41 +183,6 @@ public class VerleihServiceImpl extends AbstractObservableService implements
         return result;
     }
 
-    public boolean sindAlleVormerkenMoeglich(Kunde kunde, List<Medium> medien)
-    {
-        for (Medium medium : medien)
-        {
-            if (!istVormerkenMoeglich(medium, kunde))
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public void vormerkeAn(Kunde kunde, List<Medium> medien)
-    {
-        assert kundeImBestand(kunde) : "Vorbedingung verletzt: kundeImBestand(kunde)";
-        assert sindAlleVormerkenMoeglich(kunde, medien) : "Vorbedingung verletzt: sindAlleNichtVerliehen(medien) ";
-        Vormerkkarte karte;
-
-        // das hier funktionert! hab es gründlich getestet
-        for (Medium medium : medien)
-        {
-            if (istVorgemerkt(medium))
-            {
-                karte = getVormerkkarteFuer(medium);
-                karte.fuegeKundeHinzu(kunde);
-            }
-            else
-            {
-                karte = new Vormerkkarte(medium, kunde);
-                _vormerkkarten.put(medium, karte);
-            }
-        }
-    }
-
     @Override
     public void verleiheAn(Kunde kunde, List<Medium> medien, Datum ausleihDatum)
             throws ProtokollierException
@@ -279,6 +198,12 @@ public class VerleihServiceImpl extends AbstractObservableService implements
                     ausleihDatum);
 
             _verleihkarten.put(medium, verleihkarte);
+
+            if (getVormerkerFuer(medium, 0).equals(kunde))
+            {
+                getVormerkkarteFuer(medium).loescheErstenKunden(); // TODO kommentieren
+            }
+
             _protokollierer.protokolliere(
                     VerleihProtokollierer.EREIGNIS_AUSLEIHE, verleihkarte);
         }
@@ -342,13 +267,6 @@ public class VerleihServiceImpl extends AbstractObservableService implements
     }
 
     @Override
-    public Vormerkkarte getVormerkkarteFuer(Medium medium)
-    {
-        assert istVorgemerkt(medium) : "Vorbedingung verletzt: istVorgemerkt(medium)";
-        return _vormerkkarten.get(medium);
-    }
-
-    @Override
     public Verleihkarte getVerleihkarteFuer(Medium medium)
     {
         assert istVerliehen(medium) : "Vorbedingung verletzt: istVerliehen(medium)";
@@ -371,6 +289,85 @@ public class VerleihServiceImpl extends AbstractObservableService implements
         return result;
     }
 
+    /**
+     * 
+     * 
+     * 
+     * 
+     * 
+     * TODO AB HIER DIE GANZEN VORMERK METHODEN. MUSS ALLES KOMMENTIERT WERDEN!!!
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     */
+
+    /**
+     * Erzeugt eine neue leere HashMap.
+     */
+    private HashMap<Medium, Vormerkkarte> erzeugeVormerkkartenBestand()
+    {
+        HashMap<Medium, Vormerkkarte> result = new HashMap<Medium, Vormerkkarte>();
+        // empty map
+        return result;
+    }
+
+    public boolean istVormerkenMoeglich(Medium medium, Kunde kunde)
+    {
+
+        // TODO kommentieren welche der vorbedingunen vom aufgabenblatt hier wo gecheckt werden
+        if (istVerliehenAn(kunde, medium))
+        {
+            return false;
+        }
+
+        if (istVorgemerkt(medium))
+        {
+            Vormerkkarte karte = getVormerkkarteFuer(medium);
+            if (karte.kundeSchonInQueue(kunde) || karte.gibQueueLaenge() >= 3)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    //    TODO kommentieren
+    @Override
+    public boolean istVorgemerkt(Medium medium)
+    {
+        assert mediumImBestand(medium) : "Vorbedingung verletzt: mediumExistiert(medium)";
+        return _vormerkkarten.get(medium) != null;
+    }
+
+    //  TODO kommentieren
+    @Override
+    public Vormerkkarte getVormerkkarteFuer(Medium medium)
+    {
+        assert istVorgemerkt(medium) : "Vorbedingung verletzt: istVorgemerkt(medium)";
+        return _vormerkkarten.get(medium);
+    }
+
+    //  TODO kommentieren
     @Override
     public Kunde getVormerkerFuer(Medium medium, int i)
     {
@@ -385,4 +382,42 @@ public class VerleihServiceImpl extends AbstractObservableService implements
         }
 
     }
+
+    //  TODO kommentieren
+    public boolean sindAlleVormerkenMoeglich(Kunde kunde, List<Medium> medien)
+    {
+        for (Medium medium : medien)
+        {
+            if (!istVormerkenMoeglich(medium, kunde))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //  TODO kommentieren
+    @Override
+    public void vormerkeAn(Kunde kunde, List<Medium> medien)
+    {
+        assert kundeImBestand(kunde) : "Vorbedingung verletzt: kundeImBestand(kunde)";
+        assert sindAlleVormerkenMoeglich(kunde, medien) : "Vorbedingung verletzt: sindAlleNichtVerliehen(medien) ";
+        Vormerkkarte karte;
+
+        // das hier funktionert! hab es getestet
+        for (Medium medium : medien)
+        {
+            if (istVorgemerkt(medium))
+            {
+                karte = getVormerkkarteFuer(medium);
+                karte.fuegeKundeHinzu(kunde);
+            }
+            else
+            {
+                karte = new Vormerkkarte(medium, kunde);
+                _vormerkkarten.put(medium, karte);
+            }
+        }
+    }
+
 }

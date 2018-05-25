@@ -229,6 +229,29 @@ public interface VerleihService extends ObservableService
      */
     Verleihkarte getVerleihkarteFuer(Medium medium);
 
+    /**
+     *  
+     *  
+     *  
+     *  
+     *  
+     *  
+     *  
+     *  
+     *  
+     *  
+     *  
+     *  
+     *  
+     *  AB HIER VORMERK METHODEN TODO KOMMENTIEREN
+     *  
+     *  
+     *  
+     *  
+     *  
+     *  
+     */
+
     boolean istVorgemerkt(Medium medium);
 
     Vormerkkarte getVormerkkarteFuer(Medium medium);
@@ -243,8 +266,6 @@ public interface VerleihService extends ObservableService
      * @param i {1..3}.
      * 
      * @return Den Entleiher des Mediums.
-     * 
-     * @require vormerkkarteExists(medium) TODO
      * 
      * @ensure result == null || result == kunde
      */
