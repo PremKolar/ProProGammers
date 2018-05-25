@@ -143,6 +143,7 @@ public class VormerkWerkzeug
             public void reagiereAufAenderung()
             {
                 aktualisiereVormerkButton();
+
             }
         });
     }
@@ -160,6 +161,7 @@ public class VormerkWerkzeug
                 public void actionPerformed(ActionEvent e)
                 {
                     merkeAusgewaehlteMedienVor();
+                    _medienAuflisterWerkzeug.setzeAnzuzeigendeMedien();
                 }
             });
     }
@@ -229,8 +231,7 @@ public class VormerkWerkzeug
 
         List<Medium> selectedMedien = _medienAuflisterWerkzeug.getSelectedMedien();
         Kunde selectedKunde = _kundenAuflisterWerkzeug.getSelectedKunde();
-        // TODO,DONE,NK für Aufgabenblatt 6 (nicht löschen): Vormerken einbauen
-
+        // TODO,DONE,NK für Aufgabenblatt 6 (nicht löschen): Vormerken einbauen. WORKS
         _verleihService.vormerkeAn(selectedKunde, selectedMedien);
 
     }

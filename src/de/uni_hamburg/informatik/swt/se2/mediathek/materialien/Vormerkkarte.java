@@ -24,7 +24,7 @@ public class Vormerkkarte
 
     // Eigenschaften einer Vormerkkarte
 
-    private List<Kunde> _queue = new LinkedList<Kunde>(); // this was a Queue initially. List works much better..
+    private List<Kunde> _dreierListe = new LinkedList<Kunde>(); // this was a Queue initially. List works much better..
     private final Medium _medium;
 
     /** TODO anpassen
@@ -48,34 +48,38 @@ public class Vormerkkarte
         assert merker != null : "Vorbedingung verletzt: entleiher != null";
         assert medium != null : "Vorbedingung verletzt: medium != null";
 
-        _queue.add(merker);
+        _dreierListe.add(merker);
         _medium = medium;
     }
 
     public int gibQueueLaenge()
     {
-        return _queue.size();
+        return _dreierListe.size();
     }
 
     public void fuegeKundeHinzu(Kunde kunde)
     {
-        assert _queue.size() < 3;
-        _queue.add(kunde);
+        assert _dreierListe.size() < 3;
+        _dreierListe.add(kunde);
     }
 
     public boolean kundeSchonInQueue(Kunde merker)
     {
-        return _queue.contains(merker);
+        return _dreierListe.contains(merker);
     }
 
     public Kunde getVormerker()
     {
-        return _queue.get(0);
+        return _dreierListe.get(0);
     }
 
     public Kunde getVormerker(int i)
     {
-        return _queue.get(i);
+        if (_dreierListe.size() - 1 < i)
+        {
+            return null;
+        }
+        return _dreierListe.get(i);
     }
 
     /**

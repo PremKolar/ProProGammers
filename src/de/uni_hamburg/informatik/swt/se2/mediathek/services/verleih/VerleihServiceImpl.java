@@ -132,8 +132,16 @@ public class VerleihServiceImpl extends AbstractObservableService implements
     @Override
     public boolean istVorgemerkt(Medium medium)
     {
-        assert mediumImBestand(medium) : "Vorbedingung verletzt: mediumExistiert(medium)";
-        return _vormerkkarten.get(medium) != null;
+
+        if (_vormerkkarten.get(medium) == null)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+
     }
 
     @Override
@@ -246,9 +254,9 @@ public class VerleihServiceImpl extends AbstractObservableService implements
         assert sindAlleVormerkenMoeglich(kunde, medien) : "Vorbedingung verletzt: sindAlleNichtVerliehen(medien) ";
         Vormerkkarte karte;
 
+        // das hier funktionert! hab es gründlich getestet
         for (Medium medium : medien)
         {
-
             if (istVorgemerkt(medium))
             {
                 karte = getVormerkkarteFuer(medium);
@@ -257,11 +265,9 @@ public class VerleihServiceImpl extends AbstractObservableService implements
             else
             {
                 karte = new Vormerkkarte(medium, kunde);
+                _vormerkkarten.put(medium, karte);
             }
-
-            _vormerkkarten.put(medium, karte);
         }
-
     }
 
     @Override
@@ -372,16 +378,17 @@ public class VerleihServiceImpl extends AbstractObservableService implements
     }
 
     @Override
-    public Kunde getVormerkerFuer(Medium medium)
-    {
-        Vormerkkarte vormerkkarte = _vormerkkarten.get(medium);
-        return vormerkkarte.getVormerker();
-    }
-
-    @Override
     public Kunde getVormerkerFuer(Medium medium, int i)
     {
-        Vormerkkarte vormerkkarte = _vormerkkarten.get(medium);
-        return vormerkkarte.getVormerker(i);
+
+        if (istVorgemerkt(medium))
+        {
+            Vormerkkarte vormerkkarte = _vormerkkarten.get(medium);
+            return vormerkkarte.getVormerker(i);
+        }
+        {
+            return null;
+        }
+
     }
 }

@@ -235,8 +235,6 @@ public interface VerleihService extends ObservableService
 
     void vormerkeAn(Kunde kunde, List<Medium> medien);
 
-    Kunde getVormerkerFuer(Medium medium);
-
     /**
      * Liefert den Vormerker i des angegebenen Mediums.
      * 

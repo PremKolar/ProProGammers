@@ -88,7 +88,7 @@ public class AusleiheMedienauflisterWerkzeug extends ObservableSubWerkzeug
             Kunde ersterVormerker = null;
             if (_verleihService.istVorgemerkt(medium))
             {
-                ersterVormerker = _verleihService.getVormerkerFuer(medium);
+                ersterVormerker = _verleihService.getVormerkerFuer(medium, 0);
             }
 
             medienFormatierer.add(new AusleiheMedienFormatierer(medium,

@@ -73,7 +73,7 @@ public class VormerkMedienauflisterWerkzeug extends ObservableSubWerkzeug
     /**
      * Holt und setzt die Medieninformationen.
      */
-    private void setzeAnzuzeigendeMedien()
+    public void setzeAnzuzeigendeMedien()
     {
         List<Medium> medienListe = _medienbestand.getMedien();
         List<VormerkMedienFormatierer> medienFormatierer = new ArrayList<VormerkMedienFormatierer>();
@@ -96,9 +96,10 @@ public class VormerkMedienauflisterWerkzeug extends ObservableSubWerkzeug
 
             if (_verleihService.istVorgemerkt(medium))
             {
-                vormerker1 = _verleihService.getVormerkerFuer(medium, 1);
-                vormerker2 = _verleihService.getVormerkerFuer(medium, 2);
-                vormerker3 = _verleihService.getVormerkerFuer(medium, 3);
+
+                vormerker1 = _verleihService.getVormerkerFuer(medium, 0);
+                vormerker2 = _verleihService.getVormerkerFuer(medium, 1);
+                vormerker3 = _verleihService.getVormerkerFuer(medium, 2);
             }
 
             medienFormatierer.add(new VormerkMedienFormatierer(medium,
@@ -131,16 +132,19 @@ public class VormerkMedienauflisterWerkzeug extends ObservableSubWerkzeug
      */
     private void registriereServiceBeobachter()
     {
+
         ServiceObserver beobachter = new ServiceObserver()
         {
             @Override
             public void reagiereAufAenderung()
             {
+
                 // Wenn ein Service eine Änderung mitteilt, dann wird
                 // die angezeigte Liste aller Medien aktualisiert:
                 setzeAnzuzeigendeMedien();
             }
         };
+
         _medienbestand.registriereBeobachter(beobachter);
         _verleihService.registriereBeobachter(beobachter);
     }
