@@ -114,7 +114,7 @@ public class VerleihServiceImpl extends AbstractObservableService implements
         if (istVorgemerkt(medium))
         {
             Vormerkkarte karte = getVormerkkarteFuer(medium);
-            if (karte.kundeSchonInQueue(kunde))
+            if (karte.kundeSchonInQueue(kunde) || karte.gibQueueLaenge() == 3)
             {
                 return false;
             }
