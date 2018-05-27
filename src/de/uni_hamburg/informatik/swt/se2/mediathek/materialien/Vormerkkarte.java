@@ -58,9 +58,9 @@ public class Vormerkkarte
 
     // TODO kommentieren
 
-    public boolean kundeSchonInQueue(Kunde merker)
+    public boolean kundeSchonInQueue(Kunde kunde)
     {
-        return _dreierListe.contains(merker);
+        return _dreierListe.contains(kunde);
     }
 
     // TODO kommentieren
@@ -95,6 +95,22 @@ public class Vormerkkarte
     public void loescheErstenKunden()
     {
         _dreierListe.remove(0);
+    }
+
+    // TODO kommentieren
+    public void loescheXtenKunden(Kunde kunde)
+    {
+        if (_dreierListe.contains(kunde))
+        {
+            int x = _dreierListe.indexOf(kunde);
+            _dreierListe.remove(x);
+        }
+        else
+        {
+            System.out.println(kunde.getVorname() + " hat das Medium "
+                    + _medium.getTitel() + " nicht vorgemerkt...");
+        }
+
     }
 
 }

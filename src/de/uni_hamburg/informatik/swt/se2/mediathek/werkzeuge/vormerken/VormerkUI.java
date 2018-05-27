@@ -23,6 +23,7 @@ class VormerkUI
 {
     // UI-Komponenten
     private JButton _vormerkenButton;
+    private JButton _vormerkenCancelButton;
     private JPanel _ausleihePanel;
     private JSplitPane _auflisterSplitpane;
     private JPanel _anzeigerPanel;
@@ -100,8 +101,8 @@ class VormerkUI
         _auflisterSplitpane.setDoubleBuffered(true);
         _auflisterSplitpane.setResizeWeight(0.5);
         _auflisterSplitpane.setBackground(UIConstants.BACKGROUND_COLOR);
-        _auflisterSplitpane
-            .setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        _auflisterSplitpane.setBorder(BorderFactory.createEmptyBorder(0, 0, 0,
+                0));
         // Kundendarstellung
         _auflisterSplitpane.add(_kundenauflisterPanel, JSplitPane.TOP);
         // Mediendarstellung
@@ -154,10 +155,19 @@ class VormerkUI
         _vormerkenButton = new JButton();
         _buttonPanel.add(_vormerkenButton);
         _vormerkenButton.setText("vormerken");
-        _vormerkenButton.setPreferredSize(new Dimension(140, 100));
+        _vormerkenButton.setPreferredSize(new Dimension(100, 100));
         _vormerkenButton.setSize(-1, -1);
         _vormerkenButton.setFont(UIConstants.BUTTON_FONT);
         _vormerkenButton.setEnabled(false);
+
+        _vormerkenCancelButton = new JButton();
+        _buttonPanel.add(_vormerkenCancelButton);
+        _vormerkenCancelButton.setText("cancel");
+        _vormerkenCancelButton.setPreferredSize(new Dimension(100, 100));
+        _vormerkenCancelButton.setSize(-1, -1);
+        _vormerkenCancelButton.setFont(UIConstants.BUTTON_FONT);
+        _vormerkenCancelButton.setEnabled(false);
+
     }
 
     /**
@@ -177,6 +187,11 @@ class VormerkUI
     public JButton getVormerkenButton()
     {
         return _vormerkenButton;
+    }
+
+    public JButton getVormerkenCancelButton()
+    {
+        return _vormerkenCancelButton;
     }
 
     /**
