@@ -289,31 +289,12 @@ public class VerleihServiceImpl extends AbstractObservableService implements
         return result;
     }
 
+   
     /**
      * 
-     * 
-     * 
-     * 
-     * 
-     * TODO AB HIER DIE GANZEN VORMERK METHODEN. MUSS ALLES KOMMENTIERT WERDEN!!!
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
+     * Vormerkkarte:
      */
-
+    
     /**
      * Erzeugt eine neue leere HashMap.
      */
@@ -324,10 +305,12 @@ public class VerleihServiceImpl extends AbstractObservableService implements
         return result;
     }
 
+    
     public boolean istVormerkenMoeglich(Medium medium, Kunde kunde)
     {
 
-        // TODO kommentieren welche der vorbedingunen vom aufgabenblatt hier wo gecheckt werden
+    	assert kundeImBestand(kunde) : "Vorbedingung verletzt: kundeImBestand(kunde)";
+        assert mediumImBestand(medium) : "Vorbedingung verletzt: medienImBestand(medien)";
         if (istVerliehenAn(kunde, medium))
         {
             return false;
@@ -336,7 +319,7 @@ public class VerleihServiceImpl extends AbstractObservableService implements
         if (istVorgemerkt(medium))
         {
             Vormerkkarte karte = getVormerkkarteFuer(medium);
-            if (karte.kundeSchonInQueue(kunde) || karte.gibQueueLaenge() >= 3)
+            if (karte.kundeSchonInListe(kunde) || karte.gibListeLaenge() >= 3)
             {
                 return false;
             }
@@ -351,7 +334,7 @@ public class VerleihServiceImpl extends AbstractObservableService implements
         }
     }
 
-    //    TODO kommentieren
+    
     @Override
     public boolean istVorgemerkt(Medium medium)
     {
@@ -359,7 +342,7 @@ public class VerleihServiceImpl extends AbstractObservableService implements
         return _vormerkkarten.get(medium) != null;
     }
 
-    //  TODO kommentieren
+  
     @Override
     public Vormerkkarte getVormerkkarteFuer(Medium medium)
     {
@@ -367,7 +350,7 @@ public class VerleihServiceImpl extends AbstractObservableService implements
         return _vormerkkarten.get(medium);
     }
 
-    //  TODO kommentieren
+   
     @Override
     public Kunde getVormerkerFuer(Medium medium, int i)
     {
@@ -383,9 +366,12 @@ public class VerleihServiceImpl extends AbstractObservableService implements
 
     }
 
-    //  TODO kommentieren
+    
     public boolean sindAlleVormerkenMoeglich(Kunde kunde, List<Medium> medien)
     {
+    	assert kundeImBestand(kunde) : "Vorbedingung verletzt: kundeImBestand(kunde)";
+    	assert medienImBestand(medien) : "Vorbedingung verletzt: mediumExistiert(medium)";
+    	
         for (Medium medium : medien)
         {
             if (!istVormerkenMoeglich(medium, kunde))
@@ -396,7 +382,7 @@ public class VerleihServiceImpl extends AbstractObservableService implements
         return true;
     }
 
-    //  TODO kommentieren
+ 
     @Override
     public void vormerkeAn(Kunde kunde, List<Medium> medien)
     {

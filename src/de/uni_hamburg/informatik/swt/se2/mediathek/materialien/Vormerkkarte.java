@@ -6,7 +6,11 @@ import java.util.List;
 import de.uni_hamburg.informatik.swt.se2.mediathek.materialien.medien.Medium;
 
 /**
- * TODO kommentieren!!
+ * 
+ * Mit Hilfe der Vormerkkarte wird das Vormerken eines Mediums organisiert. 
+ * 
+ * 
+ * 
  * @author SE2-Team
  * @version SoSe 2017
  */
@@ -15,24 +19,22 @@ public class Vormerkkarte
 
     // Eigenschaften einer Vormerkkarte
 
-    private List<Kunde> _dreierListe = new LinkedList<Kunde>(); // this was a Queue initially. List works much better..
+    private List<Kunde> _dreierListe = new LinkedList<Kunde>(); // this was a Liste initially. List works much better..
     private final Medium _medium;
 
-    /** TODO anpassen (text kopiert von verleihkarte)
-     * Initialisert eine neue Verleihkarte mit den gegebenen Daten.
+    /** 
+     * Initialisert eine neue Vormerkkarte mit den gegebenen Daten.
      * 
      * @param entleiher Ein Kunde, der das Medium ausgeliehen hat.
      * @param medium Ein verliehene Medium.
-     * @param ausleihdatum Ein Datum, an dem der Kunde das Medium ausgeliehen
-     *            hat.
+     * 
      * 
      * @require entleiher != null
      * @require medium != null
-     * @require ausleihdatum != null
-     * 
+     *      * 
      * @ensure #getEntleiher() == entleiher
      * @ensure #getMedium() == medium
-     * @ensure #getAusleihdatum() == ausleihdatum
+     *
      */
     public Vormerkkarte(Medium medium, Kunde merker)
     {
@@ -43,33 +45,59 @@ public class Vormerkkarte
         _medium = medium;
     }
 
-    // TODO kommentieren
-    public int gibQueueLaenge()
+    /**
+     * Gibt die aktuelle Länge der Liste zurück
+     */
+    public int gibListeLaenge()
     {
         return _dreierListe.size();
     }
 
-    // TODO kommentieren
+   /**
+    * 
+    * Fügt der Liste einen neuen Kunden zu
+    * 
+    * @require _dreierListe.size() < 3
+    * 
+    * @param kunde
+    */
     public void fuegeKundeHinzu(Kunde kunde)
     {
         assert _dreierListe.size() < 3;
         _dreierListe.add(kunde);
     }
 
-    // TODO kommentieren
-
-    public boolean kundeSchonInQueue(Kunde kunde)
+    /**
+     * 
+     * Prüft ob der Kunde schon in der Liste vorhanden ist
+     * 
+     * 
+     * @param kunde
+     * @return true/false
+     */
+    public boolean kundeSchonInListe(Kunde kunde)
     {
         return _dreierListe.contains(kunde);
     }
 
-    // TODO kommentieren
+    /**
+     * 
+     * Gibt den ersten Vormerker zurück
+     * 
+     * @return ersten Vormerker
+     */
     public Kunde getVormerker()
     {
         return _dreierListe.get(0);
     }
 
-    // TODO kommentieren
+    /**
+     *
+     * Gibt den Vormerker an der Stelle i in der Liste zurück
+     * 
+     * @param i
+     * @return 
+     */
     public Kunde getVormerker(int i)
     {
         if (_dreierListe.size() - 1 < i)
@@ -91,13 +119,21 @@ public class Vormerkkarte
         return _medium;
     }
 
-    // TODO kommentieren
+    /**
+     * 
+     * Löscht den ersten Vormerker in der Liste
+     */
     public void loescheErstenKunden()
     {
         _dreierListe.remove(0);
     }
 
-    // TODO kommentieren
+    /**
+     * 
+     * Entfernt den Kunden aus der Vormerkung
+     * 
+     * @param kunde
+     */
     public void loescheXtenKunden(Kunde kunde)
     {
         if (_dreierListe.contains(kunde))

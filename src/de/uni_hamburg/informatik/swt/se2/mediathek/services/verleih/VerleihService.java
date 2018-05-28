@@ -231,31 +231,69 @@ public interface VerleihService extends ObservableService
 
     /**
      *  
-     *  
-     *  
-     *  
-     *  
-     *  
-     *  
-     *  
-     *  
-     *  
-     *  
-     *  
-     *  
-     *  AB HIER VORMERK METHODEN TODO KOMMENTIEREN
-     *  
-     *  
-     *  
-     *  
-     *  
-     *  
+     * Prüft ob vormerken möglich ist
+     * 
+     * @param kunde Der Kunde für den geprüft werden soll
+     * @param medium 
+     * 
+     * 
+     * @return true, wenn das vormerken für diesen Kunden möglich ist, sonst
+     *         false
+     * 
+     * @require kundeImBestand(kunde)
+     * @require mediumImBestand(medium)
+     *
+     * 
+     * @param medium
+     * @param kunde
+     * @return
+     */
+    
+    
+    public boolean istVormerkenMoeglich(Medium medium, Kunde kunde);
+    
+    
+    /**
+     * Prüft ob das angegebene Medium vorgemerkt ist.
+     * 
+     * @param medium Ein Medium, für das geprüft werden soll ob es vorgemerkt
+     *            ist.
+     * @return true, wenn das gegebene medium vorgemerkt ist, sonst false.
+     * 
+     * @require mediumImBestand(medium)
      */
 
     boolean istVorgemerkt(Medium medium);
 
+    /**
+     * Gibt alle Vormerkkarten für den angegebenen Kunden zurück.
+     * 
+     * @param kunde Ein Kunde.
+     * @return Vormerkkarte
+     *         
+     * 
+     * @require istVorgemerkt(medium)
+     * 
+     * @ensure result != null
+     */
     Vormerkkarte getVormerkkarteFuer(Medium medium);
 
+    
+    /**
+     * Merkt ein Medium für ein Kunden vor. Für ein Medium wird eine Vormerkkarte erstellt.
+     * 
+     * @param kunde Ein Kunde, an den ein Medium vormerken werden soll
+     * @param medien Die Medien, die vorgemerkt werden sollen
+     * 
+     * 
+     * @throws ProtokollierException Wenn beim Protokollieren des
+     *             Verleihvorgangs ein Fehler auftritt.
+     * 
+     * @require kundeImBestand(kunde)
+     * @require sindAlleVormerkenMoeglich(kunde, medien)
+     * 
+     * 
+     */
     void vormerkeAn(Kunde kunde, List<Medium> medien);
 
     /**
@@ -267,9 +305,24 @@ public interface VerleihService extends ObservableService
      * 
      * @return Den Entleiher des Mediums.
      * 
+     * 
+     * 
      * @ensure result == null || result == kunde
      */
     Kunde getVormerkerFuer(Medium medium, int i);
 
+    /**
+     * Prüft ob die ausgewählten Medium für den Kunde vorgemerkt werden kann
+     * 
+     * @param kunde Der Kunde für den geprüft werden soll
+     * @param medien Die medien
+     * 
+     * 
+     * @return true, wenn das Vormerken für diesen Kunden möglich ist, sonst
+     *         false
+     * 
+     * @require kundeImBestand(kunde)
+     * @require medienImBestand(medien)
+     */
     boolean sindAlleVormerkenMoeglich(Kunde kunde, List<Medium> medien);
 }

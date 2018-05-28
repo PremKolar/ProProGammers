@@ -252,7 +252,11 @@ public class VormerkWerkzeug
     }
 
     /**
-     * TODO comment
+     * 
+     * Prüft ob der Kunde die Vormerkung beim ausgewählten Medium 
+     * "Cancel" kann
+     * 
+     * 
      */
     private boolean istVormerkenCancelMoeglich()
     {
@@ -268,10 +272,15 @@ public class VormerkWerkzeug
         }
         Kunde kunde = _kundenAuflisterWerkzeug.getSelectedKunde();
         Vormerkkarte karte = _verleihService.getVormerkkarteFuer(medium);
-        return karte.kundeSchonInQueue(kunde);
+        return karte.kundeSchonInListe(kunde);
     }
 
-    // TODO comment
+    /**
+     * 
+     * Löscht den Kunden in der Vormerkkarte für das ausgewählte Medium
+     * über den Cancel Button 
+     * 
+     */
     private void cancelAusgewaehltenKundenAlsVormerker()
     {
 
@@ -337,7 +346,14 @@ public class VormerkWerkzeug
         aktualisiereVormerkCancelButton();
     }
 
-    // TODO comment
+    /**
+     * 
+     * Setzt den Ausleihbutton auf benutzbar oder unbenutzbar
+     * 
+     * Es ist davon abhängig , ob der Kunde berechtigt ist für
+     * das ausgewählte Medium die Vormerkung zu löschen
+     * 
+     */
     private void aktualisiereVormerkCancelButton()
     {
         boolean istVormerkenCancelMoeglich = istVormerkenCancelMoeglich();
