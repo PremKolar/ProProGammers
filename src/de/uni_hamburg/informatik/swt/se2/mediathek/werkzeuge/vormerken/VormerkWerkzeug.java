@@ -287,8 +287,9 @@ public class VormerkWerkzeug
         }
         Medium medium = selectedMedien.get(0);
         Kunde kunde = _kundenAuflisterWerkzeug.getSelectedKunde();
-        Vormerkkarte karte = _verleihService.getVormerkkarteFuer(medium);
-        karte.loescheXtenKunden(kunde);
+
+        _verleihService.loescheVormerkerVonKarte(kunde, medium);
+
     }
 
     /**
@@ -368,4 +369,5 @@ public class VormerkWerkzeug
     {
         return _vormerkUI.getUIPanel();
     }
+
 }

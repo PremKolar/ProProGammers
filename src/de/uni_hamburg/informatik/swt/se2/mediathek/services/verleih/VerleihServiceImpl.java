@@ -413,7 +413,7 @@ public class VerleihServiceImpl extends AbstractObservableService
         // das hier funktionert! hab es getestet
         for (Medium medium : medien)
         {
-            if (istVorgemerkt(medium))
+            if (_vormerkkarten.containsKey(medium))
             {
                 karte = getVormerkkarteFuer(medium);
                 karte.fuegeKundeHinzu(kunde);
@@ -424,6 +424,14 @@ public class VerleihServiceImpl extends AbstractObservableService
                 _vormerkkarten.put(medium, karte);
             }
         }
+        informiereUeberAenderung();
+    }
+
+    public void loescheVormerkerVonKarte(Kunde kunde, Medium medium)
+    {
+        Vormerkkarte karte = getVormerkkarteFuer(medium);
+        karte.loescheXtenKunden(kunde);
+        informiereUeberAenderung();
     }
 
 }
