@@ -21,8 +21,8 @@ import de.uni_hamburg.informatik.swt.se2.mediathek.services.medienbestand.Medien
  * @author SE2-Team
  * @version SoSe 2017
  */
-public class VerleihServiceImpl extends AbstractObservableService implements
-        VerleihService
+public class VerleihServiceImpl extends AbstractObservableService
+        implements VerleihService
 {
     /**
      * Diese Map speichert für jedes eingefügte Medium die dazugehörige
@@ -95,15 +95,18 @@ public class VerleihServiceImpl extends AbstractObservableService implements
     @Override
     public boolean istVerliehen(Medium medium)
     {
-        assert mediumImBestand(medium) : "Vorbedingung verletzt: mediumExistiert(medium)";
+        assert mediumImBestand(
+                medium) : "Vorbedingung verletzt: mediumExistiert(medium)";
         return _verleihkarten.get(medium) != null;
     }
 
     @Override
     public boolean istVerleihenMoeglich(Kunde kunde, List<Medium> medien)
     {
-        assert kundeImBestand(kunde) : "Vorbedingung verletzt: kundeImBestand(kunde)";
-        assert medienImBestand(medien) : "Vorbedingung verletzt: medienImBestand(medien)";
+        assert kundeImBestand(
+                kunde) : "Vorbedingung verletzt: kundeImBestand(kunde)";
+        assert medienImBestand(
+                medien) : "Vorbedingung verletzt: medienImBestand(medien)";
 
         return sindAlleNichtVerliehen(medien);
     }
@@ -112,7 +115,8 @@ public class VerleihServiceImpl extends AbstractObservableService implements
     public void nimmZurueck(List<Medium> medien, Datum rueckgabeDatum)
             throws ProtokollierException
     {
-        assert sindAlleVerliehen(medien) : "Vorbedingung verletzt: sindAlleVerliehen(medien)";
+        assert sindAlleVerliehen(
+                medien) : "Vorbedingung verletzt: sindAlleVerliehen(medien)";
         assert rueckgabeDatum != null : "Vorbedingung verletzt: rueckgabeDatum != null";
 
         for (Medium medium : medien)
@@ -129,7 +133,8 @@ public class VerleihServiceImpl extends AbstractObservableService implements
     @Override
     public boolean sindAlleNichtVerliehen(List<Medium> medien)
     {
-        assert medienImBestand(medien) : "Vorbedingung verletzt: medienImBestand(medien)";
+        assert medienImBestand(
+                medien) : "Vorbedingung verletzt: medienImBestand(medien)";
         boolean result = true;
         for (Medium medium : medien)
         {
@@ -144,8 +149,10 @@ public class VerleihServiceImpl extends AbstractObservableService implements
     @Override
     public boolean sindAlleVerliehenAn(Kunde kunde, List<Medium> medien)
     {
-        assert kundeImBestand(kunde) : "Vorbedingung verletzt: kundeImBestand(kunde)";
-        assert medienImBestand(medien) : "Vorbedingung verletzt: medienImBestand(medien)";
+        assert kundeImBestand(
+                kunde) : "Vorbedingung verletzt: kundeImBestand(kunde)";
+        assert medienImBestand(
+                medien) : "Vorbedingung verletzt: medienImBestand(medien)";
 
         boolean result = true;
         for (Medium medium : medien)
@@ -161,8 +168,10 @@ public class VerleihServiceImpl extends AbstractObservableService implements
     @Override
     public boolean istVerliehenAn(Kunde kunde, Medium medium)
     {
-        assert kundeImBestand(kunde) : "Vorbedingung verletzt: kundeImBestand(kunde)";
-        assert mediumImBestand(medium) : "Vorbedingung verletzt: mediumImBestand(medium)";
+        assert kundeImBestand(
+                kunde) : "Vorbedingung verletzt: kundeImBestand(kunde)";
+        assert mediumImBestand(
+                medium) : "Vorbedingung verletzt: mediumImBestand(medium)";
 
         return istVerliehen(medium) && getEntleiherFuer(medium).equals(kunde);
     }
@@ -170,7 +179,8 @@ public class VerleihServiceImpl extends AbstractObservableService implements
     @Override
     public boolean sindAlleVerliehen(List<Medium> medien)
     {
-        assert medienImBestand(medien) : "Vorbedingung verletzt: medienImBestand(medien)";
+        assert medienImBestand(
+                medien) : "Vorbedingung verletzt: medienImBestand(medien)";
 
         boolean result = true;
         for (Medium medium : medien)
@@ -187,10 +197,13 @@ public class VerleihServiceImpl extends AbstractObservableService implements
     public void verleiheAn(Kunde kunde, List<Medium> medien, Datum ausleihDatum)
             throws ProtokollierException
     {
-        assert kundeImBestand(kunde) : "Vorbedingung verletzt: kundeImBestand(kunde)";
-        assert sindAlleNichtVerliehen(medien) : "Vorbedingung verletzt: sindAlleNichtVerliehen(medien) ";
+        assert kundeImBestand(
+                kunde) : "Vorbedingung verletzt: kundeImBestand(kunde)";
+        assert sindAlleNichtVerliehen(
+                medien) : "Vorbedingung verletzt: sindAlleNichtVerliehen(medien) ";
         assert ausleihDatum != null : "Vorbedingung verletzt: ausleihDatum != null";
-        assert istVerleihenMoeglich(kunde, medien) : "Vorbedingung verletzt:  istVerleihenMoeglich(kunde, medien)";
+        assert istVerleihenMoeglich(kunde,
+                medien) : "Vorbedingung verletzt:  istVerleihenMoeglich(kunde, medien)";
 
         for (Medium medium : medien)
         {
@@ -199,11 +212,13 @@ public class VerleihServiceImpl extends AbstractObservableService implements
 
             _verleihkarten.put(medium, verleihkarte);
 
-            if (getVormerkerFuer(medium, 0).equals(kunde))
+            if (istVorgemerkt(medium))
             {
-                getVormerkkarteFuer(medium).loescheErstenKunden(); // TODO kommentieren
+                if (getVormerkerFuer(medium, 0).equals(kunde))
+                {
+                    getVormerkkarteFuer(medium).loescheErstenKunden(); // falls kunde medium vorgemerkt hatte: kunde aus vormerk liste löschen
+                }
             }
-
             _protokollierer.protokolliere(
                     VerleihProtokollierer.EREIGNIS_AUSLEIHE, verleihkarte);
         }
@@ -245,7 +260,8 @@ public class VerleihServiceImpl extends AbstractObservableService implements
     @Override
     public List<Medium> getAusgelieheneMedienFuer(Kunde kunde)
     {
-        assert kundeImBestand(kunde) : "Vorbedingung verletzt: kundeImBestand(kunde)";
+        assert kundeImBestand(
+                kunde) : "Vorbedingung verletzt: kundeImBestand(kunde)";
         List<Medium> result = new ArrayList<Medium>();
         for (Verleihkarte verleihkarte : _verleihkarten.values())
         {
@@ -261,7 +277,8 @@ public class VerleihServiceImpl extends AbstractObservableService implements
     @Override
     public Kunde getEntleiherFuer(Medium medium)
     {
-        assert istVerliehen(medium) : "Vorbedingung verletzt: istVerliehen(medium)";
+        assert istVerliehen(
+                medium) : "Vorbedingung verletzt: istVerliehen(medium)";
         Verleihkarte verleihkarte = _verleihkarten.get(medium);
         return verleihkarte.getEntleiher();
     }
@@ -269,14 +286,16 @@ public class VerleihServiceImpl extends AbstractObservableService implements
     @Override
     public Verleihkarte getVerleihkarteFuer(Medium medium)
     {
-        assert istVerliehen(medium) : "Vorbedingung verletzt: istVerliehen(medium)";
+        assert istVerliehen(
+                medium) : "Vorbedingung verletzt: istVerliehen(medium)";
         return _verleihkarten.get(medium);
     }
 
     @Override
     public List<Verleihkarte> getVerleihkartenFuer(Kunde kunde)
     {
-        assert kundeImBestand(kunde) : "Vorbedingung verletzt: kundeImBestand(kunde)";
+        assert kundeImBestand(
+                kunde) : "Vorbedingung verletzt: kundeImBestand(kunde)";
         List<Verleihkarte> result = new ArrayList<Verleihkarte>();
         for (Verleihkarte verleihkarte : _verleihkarten.values())
         {
@@ -289,12 +308,11 @@ public class VerleihServiceImpl extends AbstractObservableService implements
         return result;
     }
 
-   
     /**
      * 
      * Vormerkkarte:
      */
-    
+
     /**
      * Erzeugt eine neue leere HashMap.
      */
@@ -305,12 +323,13 @@ public class VerleihServiceImpl extends AbstractObservableService implements
         return result;
     }
 
-    
     public boolean istVormerkenMoeglich(Medium medium, Kunde kunde)
     {
 
-    	assert kundeImBestand(kunde) : "Vorbedingung verletzt: kundeImBestand(kunde)";
-        assert mediumImBestand(medium) : "Vorbedingung verletzt: medienImBestand(medien)";
+        assert kundeImBestand(
+                kunde) : "Vorbedingung verletzt: kundeImBestand(kunde)";
+        assert mediumImBestand(
+                medium) : "Vorbedingung verletzt: medienImBestand(medien)";
         if (istVerliehenAn(kunde, medium))
         {
             return false;
@@ -334,23 +353,22 @@ public class VerleihServiceImpl extends AbstractObservableService implements
         }
     }
 
-    
     @Override
     public boolean istVorgemerkt(Medium medium)
     {
-        assert mediumImBestand(medium) : "Vorbedingung verletzt: mediumExistiert(medium)";
+        assert mediumImBestand(
+                medium) : "Vorbedingung verletzt: mediumExistiert(medium)";
         return _vormerkkarten.get(medium) != null;
     }
 
-  
     @Override
     public Vormerkkarte getVormerkkarteFuer(Medium medium)
     {
-        assert istVorgemerkt(medium) : "Vorbedingung verletzt: istVorgemerkt(medium)";
+        assert istVorgemerkt(
+                medium) : "Vorbedingung verletzt: istVorgemerkt(medium)";
         return _vormerkkarten.get(medium);
     }
 
-   
     @Override
     public Kunde getVormerkerFuer(Medium medium, int i)
     {
@@ -366,12 +384,13 @@ public class VerleihServiceImpl extends AbstractObservableService implements
 
     }
 
-    
     public boolean sindAlleVormerkenMoeglich(Kunde kunde, List<Medium> medien)
     {
-    	assert kundeImBestand(kunde) : "Vorbedingung verletzt: kundeImBestand(kunde)";
-    	assert medienImBestand(medien) : "Vorbedingung verletzt: mediumExistiert(medium)";
-    	
+        assert kundeImBestand(
+                kunde) : "Vorbedingung verletzt: kundeImBestand(kunde)";
+        assert medienImBestand(
+                medien) : "Vorbedingung verletzt: mediumExistiert(medium)";
+
         for (Medium medium : medien)
         {
             if (!istVormerkenMoeglich(medium, kunde))
@@ -382,12 +401,13 @@ public class VerleihServiceImpl extends AbstractObservableService implements
         return true;
     }
 
- 
     @Override
     public void vormerkeAn(Kunde kunde, List<Medium> medien)
     {
-        assert kundeImBestand(kunde) : "Vorbedingung verletzt: kundeImBestand(kunde)";
-        assert sindAlleVormerkenMoeglich(kunde, medien) : "Vorbedingung verletzt: sindAlleNichtVerliehen(medien) ";
+        assert kundeImBestand(
+                kunde) : "Vorbedingung verletzt: kundeImBestand(kunde)";
+        assert sindAlleVormerkenMoeglich(kunde,
+                medien) : "Vorbedingung verletzt: sindAlleVormerkenMoeglich(medien) ";
         Vormerkkarte karte;
 
         // das hier funktionert! hab es getestet

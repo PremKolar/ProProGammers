@@ -405,3 +405,107 @@ am 25.5.2018 verliehen an
     Anschrift:
     Abenteuerallee 33
     24104 Kiel
+Fri Jun 01 09:11:25 CEST 2018: Ausleihe
+CD:
+    Titel: Breakaway
+    Kommentar: Nachfolger vom Album Tankful
+    Interpret: Kelly Clarkson
+    Spiellänge: 87
+am 1.6.2018 verliehen an
+    Kundennummer: 123465
+    Name: John. J. Ava
+    Telefon: unbekannt
+    Anschrift:
+    Wurtstrasse 23
+    58507 Köln
+Fri Jun 01 09:11:40 CEST 2018: Ausleihe
+CD:
+    Titel: Breakaway
+    Kommentar: Nachfolger vom Album Tankful
+    Interpret: Kelly Clarkson
+    Spiellänge: 87
+am 1.6.2018 verliehen an
+    Kundennummer: 123465
+    Name: John. J. Ava
+    Telefon: unbekannt
+    Anschrift:
+    Wurtstrasse 23
+    58507 Köln
+Fri Jun 01 09:12:50 CEST 2018: Ausleihe
+CD:
+    Titel: Breakaway
+    Kommentar: Nachfolger vom Album Tankful
+    Interpret: Kelly Clarkson
+    Spiellänge: 87
+am 1.6.2018 verliehen an
+    Kundennummer: 123465
+    Name: John. J. Ava
+    Telefon: unbekannt
+    Anschrift:
+    Wurtstrasse 23
+    58507 Köln
+Fri Jun 01 09:13:07 CEST 2018: Ausleihe
+CD:
+    Titel: Disturbia
+    Kommentar: gut
+    Interpret: Rihanna
+    Spiellänge: 90
+am 1.6.2018 verliehen an
+    Kundennummer: 123465
+    Name: John. J. Ava
+    Telefon: unbekannt
+    Anschrift:
+    Wurtstrasse 23
+    58507 Köln
+Fri Jun 01 09:13:09 CEST 2018: Ausleihe
+CD:
+    Titel: Garden State
+    Kommentar: Soundtrack
+    Interpret: Various
+    Spiellänge: 56
+am 1.6.2018 verliehen an
+    Kundennummer: 123465
+    Name: John. J. Ava
+    Telefon: unbekannt
+    Anschrift:
+    Wurtstrasse 23
+    58507 Köln
+Fri Jun 01 09:13:13 CEST 2018: Ausleihe
+CD:
+    Titel: One of the Boys
+    Kommentar: Das ist das neue Album von Katy Perry One of the Boys inklusive der Hitsingles Hot N Cold und I Kissed A Girl.
+    Interpret: Katy Perry
+    Spiellänge: 70
+am 1.6.2018 verliehen an
+    Kundennummer: 123465
+    Name: John. J. Ava
+    Telefon: unbekannt
+    Anschrift:
+    Wurtstrasse 23
+    58507 Köln
+Fri Jun 01 09:13:15 CEST 2018: Ausleihe
+CD:
+    Titel: Wincing the Night Away
+    Kommentar: Die fleißigsten Slacker der Indie-Szene 
+    Interpret: the Shins
+    Spiellänge: 69
+am 1.6.2018 verliehen an
+    Kundennummer: 123465
+    Name: John. J. Ava
+    Telefon: unbekannt
+    Anschrift:
+    Wurtstrasse 23
+    58507 Köln
+Fri Jun 01 09:14:59 CEST 2018: Ausleihe
+DVD:
+    Titel: Hellboy
+    Kommentar: Red - der dämonische Held aus der Unterwelt
+    Regisseur: Guillermo Del Toro
+    Laufzeit: 110
+am 1.6.2018 verliehen an
+    Kundennummer: 123461
+    Name: Anna Kurnikowa
+    Telefon: unbekannt
+    Anschrift:
+    Osterweg 1
+    22670 Hamburg

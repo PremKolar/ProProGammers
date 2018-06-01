@@ -236,12 +236,6 @@ public class VormerkWerkzeug
         List<Medium> medien = _medienAuflisterWerkzeug.getSelectedMedien();
         Kunde kunde = _kundenAuflisterWerkzeug.getSelectedKunde();
 
-        if (kunde.getVorname()
-            .equals("Chuck") && kunde.getNachname()
-            .equals("Norris"))
-        {
-            return true;
-        }
         // TODO,DONE,NK für Aufgabenblatt 6 (nicht löschen): Prüfung muss noch eingebaut
         // werden. Ist dies korrekt imlpementiert, wird der Vormerk-Button gemäß
         // der Anforderungen a), b), c) und e) aktiviert.
@@ -284,7 +278,8 @@ public class VormerkWerkzeug
     private void cancelAusgewaehltenKundenAlsVormerker()
     {
 
-        List<Medium> selectedMedien = _medienAuflisterWerkzeug.getSelectedMedien();
+        List<Medium> selectedMedien = _medienAuflisterWerkzeug
+            .getSelectedMedien();
         if (!istVormerkenCancelMoeglich())
         {
             return;
@@ -303,7 +298,8 @@ public class VormerkWerkzeug
     private void merkeAusgewaehlteMedienVor()
     {
 
-        List<Medium> selectedMedien = _medienAuflisterWerkzeug.getSelectedMedien();
+        List<Medium> selectedMedien = _medienAuflisterWerkzeug
+            .getSelectedMedien();
         Kunde selectedKunde = _kundenAuflisterWerkzeug.getSelectedKunde();
         // TODO,DONE,NK für Aufgabenblatt 6 (nicht löschen): Vormerken einbauen. WORKS
         _verleihService.vormerkeAn(selectedKunde, selectedMedien);
@@ -315,7 +311,8 @@ public class VormerkWerkzeug
      */
     private void zeigeAusgewaehlteMedien()
     {
-        List<Medium> selectedMedien = _medienAuflisterWerkzeug.getSelectedMedien();
+        List<Medium> selectedMedien = _medienAuflisterWerkzeug
+            .getSelectedMedien();
         _medienDetailAnzeigerWerkzeug.setMedien(selectedMedien);
     }
 
