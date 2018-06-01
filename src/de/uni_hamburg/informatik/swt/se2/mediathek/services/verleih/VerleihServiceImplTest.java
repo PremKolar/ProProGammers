@@ -60,6 +60,33 @@ public class VerleihServiceImplTest
     }
 
     @Test
+    public void TesteVormkerung()
+    {
+    	_service.vormerkeAn(_vormerkkunde, _medienListe);
+    	for(Medium m : _medienListe)
+    	{
+    	assertTrue(_service.istVorgemerkt(m));
+    	}
+    }
+    
+    @Test
+    public void VormerkungAusleihe()
+    {
+    	_service.vormerkeAn(_kunde, _medienListe);
+    	assertTrue(_service.istVerleihenMoeglich(_kunde, _medienListe));
+    	
+    	
+    }
+    
+    @Test 
+    public void VormerkungistVerliehen()
+    {
+    	_service.vormerkeAn(_kunde, _medienListe);
+    	assertTrue(_service.istVerliehen(_medienListe.get(0)));
+    	
+    }
+    
+    @Test
     public void testeNachInitialisierungIstNichtsVerliehen() throws Exception
     {
         assertTrue(_service.getVerleihkarten()
