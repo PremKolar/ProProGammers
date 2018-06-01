@@ -89,6 +89,7 @@ public class AusleiheMedienauflisterWerkzeug extends ObservableSubWerkzeug
             if (_verleihService.istVorgemerkt(medium))
             {
                 ersterVormerker = _verleihService.getVormerkerFuer(medium, 0);
+                System.out.println(ersterVormerker);
             }
 
             medienFormatierer.add(new AusleiheMedienFormatierer(medium,
@@ -147,12 +148,14 @@ public class AusleiheMedienauflisterWerkzeug extends ObservableSubWerkzeug
         List<Medium> result = new ArrayList<Medium>();
         int[] selectedRows = _ui.getMedienAuflisterTable()
             .getSelectedRows();
-        AusleiheMedienTableModel ausleiheMedienTableModel = _ui.getMedienAuflisterTableModel();
+        AusleiheMedienTableModel ausleiheMedienTableModel = _ui
+            .getMedienAuflisterTableModel();
         for (int zeile : selectedRows)
         {
             if (ausleiheMedienTableModel.zeileExistiert(zeile))
             {
-                Medium medium = ausleiheMedienTableModel.getMediumFuerZeile(zeile);
+                Medium medium = ausleiheMedienTableModel
+                    .getMediumFuerZeile(zeile);
                 result.add(medium);
             }
         }
